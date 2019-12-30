@@ -2,12 +2,12 @@ const express = require('express');
 const router = express.Router();
 
 const Product = require('../models/product');
-const Category = require('../models/category');
+
 
 router.get('/',(req,res)=>{
     res.send("Funciona");
 });
-
+//route to search all products in the database
 router.get('/api/products',(req,res)=>{
     Product.find({}).exec((err,products)=>{
         if(err){
@@ -32,7 +32,7 @@ router.get('/api/products',(req,res)=>{
     });
 });
 
-
+//POST path to send product data to the database
 router.post('/api/products',(req,res)=>{
     const {nameProduct,urlPhotoProduct,description,price,category} = req.body;
 
@@ -58,6 +58,7 @@ router.post('/api/products',(req,res)=>{
     });
 });
 
+//GET route to search products by name
 router.get('/api/search/:name',(req,res)=>{
     const {name} = req.params;
 
@@ -83,7 +84,7 @@ router.get('/api/search/:name',(req,res)=>{
 
     });
 });
-
+//GET route to search products by category
 router.get('/api/filter/:category',(req,res)=>{
     const {category} = req.params;
 
@@ -109,52 +110,6 @@ router.get('/api/filter/:category',(req,res)=>{
 
     });
 
-});
-
-
-router.get('/api/categories',(req,res)=>{
-    Category.find({}).exec((err,categories)=>{
-        if(err){
-            res.status(500).json({
-                status:"Error",
-                message:"Se presento un error"
-            });
-        }
-
-        if(!categories){
-            res.status(404).json({
-                status:"Error",
-                message:"No hay categorias en la Base"
-            });
-        }
-
-        res.status(200).json({
-            status:"OK",
-            categories
-        });
-
-    });
-});
-
-router.post('/api/categories',(req,res)=>{
-    const {name} = req.body;
-
-    const category = new Category();
-
-    category.nameCategory = name;
-
-    category.save((err,categoryStored)=>{
-        if(err || !categoryStored){
-            res.status(404).json({
-                status:"Error",
-                message:"No se pudo guardar los datos"
-            });
-        }
-        res.status(200).json({
-            status:"OK",
-            message:"Datos Guardados"
-        });
-    });
 });
 
 
