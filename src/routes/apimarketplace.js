@@ -48,12 +48,12 @@ router.post('/api/products',(req,res)=>{
         if(err || !productStored){
             res.status(404).json({
                 status:"Error",
-                message:"No se pudo guardar los datos"
+                message:"Error Registering Product"
             });
         }
         res.status(200).json({
             status:"OK",
-            message:"Datos Guardados"
+            message:"Registered Product"
         });
     });
 });
@@ -65,14 +65,14 @@ router.get('/api/search/:name',(req,res)=>{
         if(err){
             res.status(500).json({
                 status:"Error",
-                message:"Se presento un error"
+                message:"Error"
             });
         }
 
         if(!products){
             res.status(404).json({
                 status:"Error",
-                message:"No hay productos en la Base"
+                message:"There are no products"
             });
         }
 
@@ -91,14 +91,14 @@ router.get('/api/filter/:category',(req,res)=>{
         if(err){
             res.status(500).json({
                 status:"Error",
-                message:"Se presento un error"
+                message:"Error"
             });
         }
 
         if(!products){
             res.status(404).json({
                 status:"Error",
-                message:"No hay productos en la Base"
+                message:"There are no products"
             });
         }
 
