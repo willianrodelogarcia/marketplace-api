@@ -5,7 +5,7 @@ const Product = require('../models/product');
 
 
 router.get('/',(req,res)=>{
-    res.send("Funciona");
+    res.send("<h1>MarketPlace API</h1>");
 });
 //route to search all products in the database
 router.get('/api/products',(req,res)=>{
